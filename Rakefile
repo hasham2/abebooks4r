@@ -5,12 +5,12 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "abebooks4r"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{abebooks4r provides high level ruby interface for AbeBooks REST service API}
+    gem.description = %Q{abebooks4r provides high level ruby interface for AbeBooks REST service API}
     gem.email = "hasham2@gmail.com"
     gem.homepage = "http://github.com/hasham2/abebooks4r"
-    gem.authors = ["Hasham"]
-    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
+    gem.authors = ["Hasham Malik"]
+    gem.add_dependency('hpricot', '>= 0.4')    
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
