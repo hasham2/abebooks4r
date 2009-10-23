@@ -70,7 +70,7 @@ module Abebooks4r
 				raise Abebooks4r::RequestError, "HTTP Response: #{res.code} #{res.message}"
 			end
 			log "Response text: #{res.body}"
-			Response.new(res)
+			Response.new(res.body)
 		end
 		
 		
@@ -100,10 +100,21 @@ module Abebooks4r
 			def error_code
 				#Element.get(@doc, "error/code")
 			end
-      
-			# Return error message.
-			def is_success?
-				     	      	      
+			
+			# Return an array of Abebooks4r::Element item objects.
+			def books
+				unless @books
+					@books = (@doc/"book").collect {|item| Element.new(item)}
+				end
+				@books
+			end
+			
+			# Return total results.
+			def total_results
+				unless @total_results
+					@total_results = (@doc/"resultcount").inner_html.to_i
+				end
+				@total_results		     	      	      
 			end     				                          
 		end
 		
@@ -125,9 +136,109 @@ module Abebooks4r
 		def self.prepare_url(params)
 			params = params.merge(self.options)
 			url = URI.parse("http://search2.abebooks.com/search?" +
-    	    	    	params.to_a.collect{|item| item.first + "=" + CGI::escape(item.last) }.join("&")
+				params.to_a.collect{|item| item.first.id2name + "=" + CGI::escape(item.last) }.join("&")
           		)
           		return url
 		end	
-	end	
+	end
+	
+	# Internal wrapper class to provide convenient method to access Hpricot element value.
+	class Element
+	
+		# Pass Hpricot::Elements object
+		def initialize(element)
+			@element = element
+		end
+
+		# Returns Hpricot::Elments object    
+		def elem
+			@element
+		end
+    
+		# Find Hpricot::Elements matching the given path. Example: element/"author".
+		def /(path)
+			elements = @element/path
+			return nil if elements.size == 0
+			elements
+		end
+    
+		# Find Hpricot::Elements matching the given path, and convert to Abebooks4r::Element.
+		# Returns an array Abebooks4r::Elements if more than Hpricot::Elements size is greater than 1.
+		def search_and_convert(path)
+			elements = self./(path)
+			return unless elements
+			elements = elements.map{|element| Element.new(element)}
+			return elements.first if elements.size == 1
+			elements
+		end
+
+		# Get the text value of the given path, leave empty to retrieve current element value.
+		def get(path='')
+			Element.get(@element, path)
+		end
+    
+		# Get the unescaped HTML text of the given path.
+		def get_unescaped(path='')
+			Element.get_unescaped(@element, path)
+		end
+    
+		# Get the array values of the given path.
+		def get_array(path='')
+			Element.get_array(@element, path)
+		end
+
+		# Get the children element text values in hash format with the element names as the hash keys.
+		def get_hash(path='')
+			Element.get_hash(@element, path)
+		end
+
+		# Similar to #get, except an element object must be passed-in.
+		def self.get(element, path='')
+			return unless element
+			result = element.at(path)
+			result = result.inner_html if result
+			result
+		end
+    
+		# Similar to #get_unescaped, except an element object must be passed-in.    
+		def self.get_unescaped(element, path='')
+			result = get(element, path)
+			CGI::unescapeHTML(result) if result
+		end
+
+		# Similar to #get_array, except an element object must be passed-in.
+		def self.get_array(element, path='')
+			return unless element
+      
+			result = element/path
+			if (result.is_a? Hpricot::Elements) || (result.is_a? Array)
+				parsed_result = []
+				result.each {|item|
+					parsed_result << Element.get(item)
+				}
+				parsed_result
+			else
+				[Element.get(result)]
+			end
+        	end
+
+        	# Similar to #get_hash, except an element object must be passed-in.
+        	def self.get_hash(element, path='')
+        		return unless element
+    
+        		result = element.at(path)
+        		if result
+        			hash = {}
+        			result = result.children
+        			result.each do |item|
+        				hash[item.name.to_sym] = item.inner_html
+        			end 
+        			hash
+        		end
+        	end
+    
+        	def to_s
+        		elem.to_s if elem
+        	end
+        end	
 end	
