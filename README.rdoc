@@ -1,6 +1,6 @@
 = abebooks4r
 
-Description goes here.
+abebooks4r provides high level ruby interface for AbeBooks REST service API.
 
 == Note on Patches/Pull Requests
  
