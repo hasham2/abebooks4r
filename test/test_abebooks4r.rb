@@ -11,11 +11,11 @@ class TestAbebooks4r < Test::Unit::TestCase
 		options[:clientkey] = ABE_ACCESS_KEY  	  
   	end
 	
-  	Abebooks4r::Abe.debug = false
+  	Abebooks4r::Abe.debug = true
 	
 	def test_abebooks_total_result_count
 		resp = Abebooks4r::Abe.search(:author => 'Brad Ediger', :title => 'Advanced Rails')
-		assert(resp.total_results == 43)
+		assert(resp.total_results == 41)
 	end
 	
 	def test_abebooks_book_object

@@ -2,6 +2,32 @@
 
 abebooks4r provides high level ruby interface for AbeBooks REST service API.
 
+== Installation
+	
+  $ gem sources -a http://gemcutter.org
+  $ sudo gem install abebooks4r
+
+Abebooks4r requires hpricot gem
+  
+  $ sudo gem install hpricot
+  
+== Usage  
+
+  require 'abebooks4r'
+  
+  Abebooks4r::Abe.configure do |options|    
+	options[:clientkey] = ABE_ACCESS_KEY  	  
+  end
+  
+  res = Abebooks4r::Abe.search(:author => 'Brad Ediger', :title => 'Advanced Rails')
+  
+  res.books.each do |book|
+  	puts book.get('title')
+  	puts book.get('author')
+  end
+
+== Links  
+  
 == Note on Patches/Pull Requests
  
 * Fork the project.
