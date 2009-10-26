@@ -88,17 +88,17 @@ module Abebooks4r
       
 			# Return true if response has an error.
 			def has_error?
-				#!(error.nil? || error.empty?)
+				!(error.nil? || error.empty?)
 			end
 
 			# Return error message.
 			def error
-				#Element.get(@doc, "error/message")
+				Element.get(@doc, "searchresults/messages")
 			end
       
 			# Return error code
-			def error_code
-				#Element.get(@doc, "error/code")
+			def error_message
+				Element.get(@doc, "searchresults/messages")
 			end
 			
 			# Return an array of Abebooks4r::Element item objects.

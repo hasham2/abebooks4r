@@ -21,13 +21,18 @@ Abebooks4r requires hpricot gem
   
   res = Abebooks4r::Abe.search(:author => 'Brad Ediger', :title => 'Advanced Rails')
   
-  res.books.each do |book|
-  	puts book.get('title')
-  	puts book.get('author')
+  unless res.has_error?
+    res.books.each do |book|
+      puts book.get('title')
+      puts book.get('author')
+    end
   end
 
 == Links  
-  
+
+  http://www.abebooks.de/docs/AffiliateProgram/WebServices/
+  http://hasham2.blogspot.com/
+
 == Note on Patches/Pull Requests
  
 * Fork the project.
@@ -41,4 +46,4 @@ Abebooks4r requires hpricot gem
 
 == Copyright
 
-Copyright (c) 2009 Hasham. See LICENSE for details.
+Copyright (c) 2009 Hasham Malik. See LICENSE for details.

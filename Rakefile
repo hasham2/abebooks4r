@@ -6,7 +6,7 @@ begin
   Jeweler::Tasks.new do |gem|
     gem.name = "abebooks4r"
     gem.summary = %Q{abebooks4r provides high level ruby interface for AbeBooks REST service API}
-    gem.description = %Q{abebooks4r provides high level ruby interface for AbeBooks REST service API}
+    gem.description = %Q{Abebooks is a service to  buy and sell new and used books online. abebooks4r provides high level ruby interface for AbeBooks REST service API}
     gem.email = "hasham2@gmail.com"
     gem.homepage = "http://github.com/hasham2/abebooks4r"
     gem.authors = ["Hasham Malik"]
