@@ -30,8 +30,8 @@ Abebooks4r requires hpricot gem
 
 == Links  
 
-  http://www.abebooks.de/docs/AffiliateProgram/WebServices/
-  http://hasham2.blogspot.com/
+  [http://www.abebooks.de/docs/AffiliateProgram/WebServices/]
+  [http://hasham2.blogspot.com/]
 
 == Note on Patches/Pull Requests
  
