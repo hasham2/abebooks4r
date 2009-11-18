@@ -10,9 +10,13 @@ begin
     gem.email = "hasham2@gmail.com"
     gem.homepage = "http://github.com/hasham2/abebooks4r"
     gem.authors = ["Hasham Malik"]
-    gem.add_dependency('hpricot', '>= 0.4')    
+    gem.add_dependency('hpricot', '>= 0.4') 
+    gem.rubyforge_project = 'abebooks4r'   
   end
   Jeweler::GemcutterTasks.new
+  Jeweler::RubyforgeTasks.new do |rubyforge|
+    rubyforge.doc_task = "rdoc"
+  end  
 rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
 end

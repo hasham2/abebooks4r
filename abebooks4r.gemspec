@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Hasham Malik"]
-  s.date = %q{2009-10-26}
+  s.date = %q{2009-10-27}
   s.description = %q{Abebooks is a service to  buy and sell new and used books online. abebooks4r provides high level ruby interface for AbeBooks REST service API}
   s.email = %q{hasham2@gmail.com}
   s.extra_rdoc_files = [
@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
+     "abebooks4r.gemspec",
      "lib/abebooks4r.rb",
      "test/helper.rb",
      "test/test_abebooks4r.rb"
@@ -30,6 +31,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/hasham2/abebooks4r}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
+  s.rubyforge_project = %q{abebooks4r}
   s.rubygems_version = %q{1.3.5}
   s.summary = %q{abebooks4r provides high level ruby interface for AbeBooks REST service API}
   s.test_files = [
