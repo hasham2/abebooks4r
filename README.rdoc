@@ -33,7 +33,7 @@ Abebooks4r requires hpricot gem
   http://www.abebooks.de/docs/AffiliateProgram/WebServices/
   http://hasham2.blogspot.com/
 
-For logging logging bugs here is link to lighthouse 
+For logging bugs here is link to lighthouse 
 
   http://hasham2.lighthouseapp.com/projects/41536-abebooks4r/
 
